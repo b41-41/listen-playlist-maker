@@ -1,5 +1,5 @@
 import Main from './components/Main';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import 'normalize.css';
 
 function App() {
