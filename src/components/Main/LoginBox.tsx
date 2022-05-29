@@ -1,9 +1,13 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
+import { useTranslation } from 'react-i18next';
+import '../../i18n';
 
 type Props = {};
 
 const LoginBox = (props: Props) => {
+  const { t } = useTranslation(['common']);
+
   const onFinish = (values: any) => {
     console.log('Success:', values);
   };
@@ -23,7 +27,7 @@ const LoginBox = (props: Props) => {
       autoComplete="off"
     >
       <Form.Item
-        label="Username"
+        label={t('LOGIN.USERNAME')}
         name="username"
         rules={[{ required: true, message: 'Please input your username!' }]}
       >
@@ -31,7 +35,7 @@ const LoginBox = (props: Props) => {
       </Form.Item>
 
       <Form.Item
-        label="Password"
+        label={t('LOGIN.PASSWORD')}
         name="password"
         rules={[{ required: true, message: 'Please input your password!' }]}
       >
@@ -43,7 +47,7 @@ const LoginBox = (props: Props) => {
         valuePropName="checked"
         wrapperCol={{ offset: 8, span: 16 }}
       >
-        <Checkbox>Remember me</Checkbox>
+        <Checkbox>{t('LOGIN.REMEMBER_ME')}</Checkbox>
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
