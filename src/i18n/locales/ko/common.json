@@ -1,0 +1,7 @@
+{
+  "LOGIN": {
+    "USERNAME": "아이디",
+    "PASSWORD": "비밀번호",
+    "REMEMBER_ME": "로그인 기억하기"
+  }
+}
