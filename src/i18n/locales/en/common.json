@@ -1,7 +1,9 @@
 {
   "LOGIN": {
-    "USERNAME": "Username",
+    "USERNAME": "E-Mail",
     "PASSWORD": "Password",
-    "REMEMBER_ME": "Remember me"
+    "REMEMBER_ME": "Remember me",
+    "PLS_INPUT_USERNAME": "Please input your E-Mail!",
+    "PLS_INPUT_PASSWORD": "Please input your password!"
   }
 }
