@@ -1,7 +1,9 @@
 {
   "LOGIN": {
-    "USERNAME": "아이디",
+    "USERNAME": "이메일",
     "PASSWORD": "비밀번호",
-    "REMEMBER_ME": "로그인 기억하기"
+    "REMEMBER_ME": "로그인 기억하기",
+    "PLS_INPUT_USERNAME": "이메일을 입력해 주세요.",
+    "PLS_INPUT_PASSWORD": "비밀번호를 입력해 주세요."
   }
 }

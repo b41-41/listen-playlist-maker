@@ -1,24 +1,24 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
-import { useTranslation } from 'react-i18next';
-import '../../i18n';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../fbase';
+import { useTranslation } from 'react-i18next';
+import { Form, Input, Button } from 'antd';
+import '../../i18n';
 
 type Props = {};
 
-type LoginBoxFormProps = {
+type JoinBoxFormProps = {
   username: string;
   password: string;
 };
 
-const LoginBox = (props: Props) => {
+const JoinBox = (props: Props) => {
   const { t } = useTranslation(['common']);
 
-  const onFinish = async (values: LoginBoxFormProps) => {
-    await signInWithEmailAndPassword(auth, values.username, values.password)
+  const onFinish = async (values: JoinBoxFormProps) => {
+    await createUserWithEmailAndPassword(auth, values.username, values.password)
       .then((userCredential) => {
-        console.log('로그인 성공 :', userCredential.user);
+        console.log('가입 성공 :', userCredential.user);
       })
       .catch((err) => console.error(err));
   };
@@ -53,21 +53,13 @@ const LoginBox = (props: Props) => {
         <Input.Password />
       </Form.Item>
 
-      <Form.Item
-        name="remember"
-        valuePropName="checked"
-        wrapperCol={{ offset: 8, span: 16 }}
-      >
-        <Checkbox>{t('LOGIN.REMEMBER_ME')}</Checkbox>
-      </Form.Item>
-
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type="primary" htmlType="submit" shape="round">
-          Submit
+          JOIN
         </Button>
       </Form.Item>
     </Form>
   );
 };
 
-export default LoginBox;
+export default JoinBox;
