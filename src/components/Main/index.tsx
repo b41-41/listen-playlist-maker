@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-import { Row, Button, Col, Layout, Space, Typography } from 'antd';
+import { Row, Button, Col, Layout, Space, Typography, Modal } from 'antd';
 import LoginBox from './LoginBox';
 import JoinBox from './JoinBox';
 import About from './About';
@@ -11,7 +11,7 @@ const Main = (props: Props): ReactElement => {
   const { Title } = Typography;
   const [isLoginBox, setIsLoginBox] = useState<boolean>(false);
   const [isJoinBox, setIsJoinBox] = useState<boolean>(false);
-  const [isAbout, setIsAbout] = useState<boolean>(false);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const onOpenLoginBox = (): void => {
     setIsLoginBox(!isLoginBox);
@@ -21,14 +21,17 @@ const Main = (props: Props): ReactElement => {
     setIsJoinBox(!isJoinBox);
   };
 
-  const onOpenAbout = (): void => {
-    setIsAbout(!isAbout);
+  const onOpenModal = (): void => {
+    setIsModalVisible(true);
+  };
+
+  const onClouseModal = (): void => {
+    setIsModalVisible(false);
   };
 
   const handleReset = (): void => {
     setIsJoinBox(false);
     setIsLoginBox(false);
-    setIsAbout(false);
   };
 
   return (
@@ -49,7 +52,7 @@ const Main = (props: Props): ReactElement => {
             </Space>
             <Row justify="center">
               <Space direction="vertical" size={5} align="center">
-                {!isLoginBox && !isJoinBox && !isAbout && (
+                {!isLoginBox && !isJoinBox && (
                   <>
                     <Button size="large" shape="round" onClick={onOpenLoginBox}>
                       로그인
@@ -57,7 +60,7 @@ const Main = (props: Props): ReactElement => {
                     <Button size="large" shape="round" onClick={onOpenJoinBox}>
                       회원가입
                     </Button>
-                    <Button size="large" shape="round" onClick={onOpenAbout}>
+                    <Button size="large" shape="round" onClick={onOpenModal}>
                       듣플만이란?
                     </Button>
                   </>
@@ -78,14 +81,6 @@ const Main = (props: Props): ReactElement => {
                     </Button>
                   </>
                 )}
-                {isAbout && (
-                  <>
-                    <About />
-                    <Button size="middle" shape="round" onClick={handleReset}>
-                      돌아가기
-                    </Button>
-                  </>
-                )}
               </Space>
             </Row>
           </Col>
@@ -94,6 +89,14 @@ const Main = (props: Props): ReactElement => {
       <Footer style={{ backgroundColor: 'white', textAlign: 'center' }}>
         듣기시험 플레이리스트 만들기
       </Footer>
+      <Modal
+        title="듣플만이란?"
+        visible={isModalVisible}
+        footer={null}
+        onCancel={onClouseModal}
+      >
+        <About />
+      </Modal>
     </Layout>
   );
 };
