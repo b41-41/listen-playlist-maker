@@ -1,7 +1,8 @@
 import React, { ReactElement, useState } from 'react';
-import { Row, Button, Col, Layout, Space, Typography } from 'antd';
+import { Row, Button, Col, Layout, Space, Typography, Modal } from 'antd';
 import LoginBox from './LoginBox';
 import JoinBox from './JoinBox';
+import About from './About';
 
 type Props = {};
 
@@ -10,13 +11,22 @@ const Main = (props: Props): ReactElement => {
   const { Title } = Typography;
   const [isLoginBox, setIsLoginBox] = useState<boolean>(false);
   const [isJoinBox, setIsJoinBox] = useState<boolean>(false);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
-  const handleLoginBox = (): void => {
+  const onOpenLoginBox = (): void => {
     setIsLoginBox(!isLoginBox);
   };
 
-  const handleJoinBox = (): void => {
+  const onOpenJoinBox = (): void => {
     setIsJoinBox(!isJoinBox);
+  };
+
+  const onOpenModal = (): void => {
+    setIsModalVisible(true);
+  };
+
+  const onClouseModal = (): void => {
+    setIsModalVisible(false);
   };
 
   const handleReset = (): void => {
@@ -44,13 +54,13 @@ const Main = (props: Props): ReactElement => {
               <Space direction="vertical" size={5} align="center">
                 {!isLoginBox && !isJoinBox && (
                   <>
-                    <Button size="large" shape="round" onClick={handleLoginBox}>
+                    <Button size="large" shape="round" onClick={onOpenLoginBox}>
                       로그인
                     </Button>
-                    <Button size="large" shape="round" onClick={handleJoinBox}>
+                    <Button size="large" shape="round" onClick={onOpenJoinBox}>
                       회원가입
                     </Button>
-                    <Button size="large" shape="round">
+                    <Button size="large" shape="round" onClick={onOpenModal}>
                       듣플만이란?
                     </Button>
                   </>
@@ -79,6 +89,14 @@ const Main = (props: Props): ReactElement => {
       <Footer style={{ backgroundColor: 'white', textAlign: 'center' }}>
         듣기시험 플레이리스트 만들기
       </Footer>
+      <Modal
+        title="듣플만이란?"
+        visible={isModalVisible}
+        footer={null}
+        onCancel={onClouseModal}
+      >
+        <About />
+      </Modal>
     </Layout>
   );
 };
