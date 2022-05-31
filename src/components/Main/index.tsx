@@ -2,6 +2,7 @@ import React, { ReactElement, useState } from 'react';
 import { Row, Button, Col, Layout, Space, Typography } from 'antd';
 import LoginBox from './LoginBox';
 import JoinBox from './JoinBox';
+import About from './About';
 
 type Props = {};
 
@@ -10,18 +11,24 @@ const Main = (props: Props): ReactElement => {
   const { Title } = Typography;
   const [isLoginBox, setIsLoginBox] = useState<boolean>(false);
   const [isJoinBox, setIsJoinBox] = useState<boolean>(false);
+  const [isAbout, setIsAbout] = useState<boolean>(false);
 
-  const handleLoginBox = (): void => {
+  const onOpenLoginBox = (): void => {
     setIsLoginBox(!isLoginBox);
   };
 
-  const handleJoinBox = (): void => {
+  const onOpenJoinBox = (): void => {
     setIsJoinBox(!isJoinBox);
+  };
+
+  const onOpenAbout = (): void => {
+    setIsAbout(!isAbout);
   };
 
   const handleReset = (): void => {
     setIsJoinBox(false);
     setIsLoginBox(false);
+    setIsAbout(false);
   };
 
   return (
@@ -42,15 +49,15 @@ const Main = (props: Props): ReactElement => {
             </Space>
             <Row justify="center">
               <Space direction="vertical" size={5} align="center">
-                {!isLoginBox && !isJoinBox && (
+                {!isLoginBox && !isJoinBox && !isAbout && (
                   <>
-                    <Button size="large" shape="round" onClick={handleLoginBox}>
+                    <Button size="large" shape="round" onClick={onOpenLoginBox}>
                       로그인
                     </Button>
-                    <Button size="large" shape="round" onClick={handleJoinBox}>
+                    <Button size="large" shape="round" onClick={onOpenJoinBox}>
                       회원가입
                     </Button>
-                    <Button size="large" shape="round">
+                    <Button size="large" shape="round" onClick={onOpenAbout}>
                       듣플만이란?
                     </Button>
                   </>
@@ -66,6 +73,14 @@ const Main = (props: Props): ReactElement => {
                 {isJoinBox && (
                   <>
                     <JoinBox />
+                    <Button size="middle" shape="round" onClick={handleReset}>
+                      돌아가기
+                    </Button>
+                  </>
+                )}
+                {isAbout && (
+                  <>
+                    <About />
                     <Button size="middle" shape="round" onClick={handleReset}>
                       돌아가기
                     </Button>
