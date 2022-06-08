@@ -5,6 +5,7 @@ import 'normalize.css';
 import { useEffect, useState } from 'react';
 import { auth } from './fbase';
 import AppLayout from './components/AppLayout';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   const [isInit, setIsInit] = useState<boolean>(false);
@@ -24,7 +25,18 @@ function App() {
 
   return (
     <div className="App">
-      {isInit ? isLoggedIn ? <AppLayout /> : <Main /> : <div>Loading...</div>}
+      {isInit ? (
+        isLoggedIn ? (
+          <Routes>
+            <Route path="/login" element={<Main />}></Route>
+            <Route path="/" element={<AppLayout />}></Route>
+          </Routes>
+        ) : (
+          <Main />
+        )
+      ) : (
+        <div>Loading...</div>
+      )}
     </div>
   );
 }
