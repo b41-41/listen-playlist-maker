@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { useTranslation } from 'react-i18next';
 import '../../i18n';
@@ -14,13 +14,17 @@ type LoginBoxFormProps = {
 
 const LoginBox = (props: Props) => {
   const { t } = useTranslation(['common']);
+  const [hasError, setHasError] = useState<boolean>(false);
 
   const onFinish = async (values: LoginBoxFormProps) => {
     await signInWithEmailAndPassword(auth, values.username, values.password)
       .then((userCredential) => {
         console.log('로그인 성공 :', userCredential.user);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setHasError(true);
+      });
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -52,6 +56,12 @@ const LoginBox = (props: Props) => {
       >
         <Input.Password />
       </Form.Item>
+
+      {hasError && (
+        <div style={{ textAlign: 'center', color: 'red' }}>
+          에러가 발생했습니다.
+        </div>
+      )}
 
       <Form.Item
         name="remember"
