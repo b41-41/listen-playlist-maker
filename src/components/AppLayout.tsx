@@ -1,12 +1,11 @@
-import React, { ReactComponentElement, ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../fbase';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Layout, Row, Button, Typography } from 'antd';
 import Manage from './Manage';
 
-type Props = {};
+type Props = { children: any };
 
 const { Header, Footer, Content } = Layout;
 const { Text } = Typography;
@@ -21,6 +20,9 @@ const AppLayout = (props: Props) => {
         console.error(error);
       });
   };
+
+  console.log(props);
+
   return (
     <Layout>
       <Header style={{ color: 'white' }}>
@@ -29,12 +31,7 @@ const AppLayout = (props: Props) => {
           <Button onClick={Logout}>로그아웃</Button>
         </Row>
       </Header>
-      <Content style={{ textAlign: 'center' }}>
-        <Routes>
-          <Route path="/" element={<>안녕</>} />
-          <Route path="/manage" element={<Manage />} />
-        </Routes>
-      </Content>
+      <Content style={{ textAlign: 'center' }}>{props.children}</Content>
       <Footer style={{ backgroundColor: 'white' }}>
         <Text>문의: malgolil41@gmail.com</Text>
       </Footer>

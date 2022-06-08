@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { Row, Button, Col, Layout, Space, Typography, Modal } from 'antd';
 import LoginBox from './LoginBox';
 import JoinBox from './JoinBox';
